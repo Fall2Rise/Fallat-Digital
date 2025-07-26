@@ -5,53 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fallat Digital | Smart Tools for Smart Marketers</title>
 <style>
-  body {font-family: Arial, sans-serif; margin:0; padding:0; background:#0a0f2c; color:#fff;}
-  header {text-align:center; padding:50px 20px;}
-  h1 {font-size:3em; margin-bottom:0; color:#00ff99;}
-  h2 {font-weight:normal; color:#fff;}
-  nav {text-align:center; margin-top:10px;}
-  nav a {color:#00ff99; margin:0 10px; text-decoration:none; font-weight:bold;}
-  .products {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:40px;}
-  .product {background:#11183d; border-radius:12px; padding:20px; box-shadow:0 0 10px rgba(0,255,153,0.4);}
-  .product h3 {color:#00ff99;}
-  .product p {font-size:0.9em;}
-  .product button {background:#00ff99; color:#0a0f2c; border:none; padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer;}
-  footer {text-align:center; padding:20px; font-size:0.8em; color:#888;}
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a0f2c 0%, #1b2b4f 100%);
+    color: #fff;
+  }
+  header {
+    text-align: center;
+    padding: 80px 20px 100px;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10, 15, 44, 0.6);
+  }
+  header h1 {
+    position: relative;
+    font-size: 3.2em;
+    margin-bottom: 10px;
+    color: #00ff99;
+    z-index: 1;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  }
+  header h2 {
+    position: relative;
+    font-weight: normal;
+    color: #fff;
+    font-size: 1.4em;
+    z-index: 1;
+  }
+  .cta-banner {
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+  }
+  .cta-banner button {
+    background: linear-gradient(90deg, #ffae00, #ff6a00);
+    color: #fff;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  .cta-banner button:hover {
+    background: linear-gradient(90deg, #ff6a00, #ffae00);
+  }
+  nav {
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+  }
+  nav a {
+    color: #00ff99;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .product {
+    background: #11183d;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+  }
+  .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,255,153,0.6);
+  }
+  .product img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .trust-badges {
+    text-align: center;
+    margin: 40px auto;
+  }
+  .trust-badges img {
+    height: 50px;
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+  .testimonials {
+    background: #1b2b4f;
+    padding: 40px 20px;
+    margin: 40px 0;
+    border-radius: 12px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .testimonials h3 {
+    color: #00ff99;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .testimonial {
+    font-style: italic;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9em;
+    color: #aaa;
+    background: #0a0f2c;
+  }
+  footer a {
+    color: #00ff99;
+  }
 </style>
 </head>
 <body>
   <header>
     <h1>Fallat Digital</h1>
     <h2>Smart Tools for Smart Marketers</h2>
+    <div class="cta-banner">
+      <button onclick="document.querySelector('.products').scrollIntoView({behavior:'smooth'})">🔥 Get Started Now</button>
+    </div>
     <nav>
       <a href="/">Home</a>
-      <a href="/blog">Blog</a>
+      <a href="/blog/index.html">Blog</a>
     </nav>
   </header>
   <section class="products">
     <div class="product">
+      <img src="https://images.unsplash.com/photo-1607083203103-3d63b4f9a3df?auto=format&fit=crop&w=800&q=80" alt="AI Prompts">
       <h3>200 AI Prompts for Social Media Managers</h3>
       <p>A curated PDF with ready-to-use prompts to speed up your content creation.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_6fYfZBcqYb4jg88fYZ'">Buy Now $19</button>
     </div>
     <div class="product">
+      <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" alt="Content Calendar">
       <h3>30-Day Content Calendar Template</h3>
       <p>Notion & Google Sheets template to plan your month with AI prompts integrated.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_9AQcO3bRTdN1eQY8ww'">Buy Now $29</button>
     </div>
     <div class="product">
+      <img src="https://images.unsplash.com/photo-1581090700227-4c4d3a4e6e52?auto=format&fit=crop&w=800&q=80" alt="Ad Toolkit">
       <h3>High-Engagement Ad Copy Prompt Toolkit</h3>
       <p>Craft better ads faster with proven AI prompts for copywriting.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_cN2bJ71Zlf3KcMUfYZ'">Buy Now $15</button>
     </div>
     <div class="product">
+      <img src="https://images.unsplash.com/photo-1618005198919-d3d4b1e98209?auto=format&fit=crop&w=800&q=80" alt="All in One Bundle">
       <h3>All-in-One Bundle</h3>
       <p>Get everything and save! Instant download of all products.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_fZe8wt9Rj6Ff38I5kH'">Buy Now $49</button>
     </div>
   </section>
+  <section class="trust-badges">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/SSL-certificates.svg" alt="SSL Secured">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968523.png" alt="Stripe Payment">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Verified Seller">
+  </section>
+  <section class="testimonials">
+    <h3>What Our Customers Say</h3>
+    <div class="testimonial">“Absolutely loved these AI prompts – saved me hours every week!” – Sarah L.</div>
+    <div class="testimonial">“The content calendar is a game changer for my social media planning.” – James K.</div>
+    <div class="testimonial">“The ad copy toolkit improved my click-through rates instantly!” – Maria R.</div>
+  </section>
   <footer>
-    &copy; 2025 Fallat Digital. All rights reserved. <a href="/blog" style="color:#00ff99;">Visit our Blog</a>
+    &copy; 2025 Fallat Digital. All rights reserved. <a href="/blog/index.html">Visit our Blog</a>
   </footer>
 </body>
 </html>
