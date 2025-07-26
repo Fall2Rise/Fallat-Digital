@@ -14,29 +14,29 @@
   }
   header {
     text-align: center;
-    padding: 80px 20px 100px;
-    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    padding: 120px 20px 140px;
+    background: url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
     position: relative;
   }
   header::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(10, 15, 44, 0.6);
+    background: rgba(0, 0, 0, 0.6);
   }
   header h1 {
     position: relative;
-    font-size: 3.2em;
+    font-size: 3.5em;
     margin-bottom: 10px;
     color: #00ff99;
     z-index: 1;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
   }
   header h2 {
     position: relative;
     font-weight: normal;
     color: #fff;
-    font-size: 1.4em;
+    font-size: 1.6em;
     z-index: 1;
   }
   .cta-banner {
@@ -48,28 +48,44 @@
     background: linear-gradient(90deg, #ffae00, #ff6a00);
     color: #fff;
     border: none;
-    padding: 16px 30px;
+    padding: 18px 40px;
     border-radius: 50px;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.3em;
     cursor: pointer;
-    transition: background 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
   }
   .cta-banner button:hover {
     background: linear-gradient(90deg, #ff6a00, #ffae00);
+    transform: scale(1.05);
   }
   nav {
     position: relative;
     z-index: 1;
-    margin-top: 20px;
+    margin-top: 30px;
   }
   nav a {
     color: #00ff99;
-    margin: 0 15px;
+    margin: 0 20px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.2em;
+  }
+  .highlight-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: #222f5a;
+  }
+  .highlight-section h2 {
+    font-size: 2em;
+    color: #00ff99;
+  }
+  .highlight-section p {
     font-size: 1.1em;
+    max-width: 800px;
+    margin: 20px auto;
+    line-height: 1.6;
   }
   .products {
     display: grid;
@@ -83,13 +99,13 @@
     background: #11183d;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
   }
   .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(0,255,153,0.6);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(0,255,153,0.6);
   }
   .product img {
     max-width: 100%;
@@ -98,35 +114,40 @@
   }
   .trust-badges {
     text-align: center;
-    margin: 40px auto;
+    margin: 50px auto;
   }
   .trust-badges img {
     height: 50px;
-    margin: 0 10px;
+    margin: 0 15px;
     vertical-align: middle;
   }
   .testimonials {
     background: #1b2b4f;
-    padding: 40px 20px;
-    margin: 40px 0;
+    padding: 60px 20px;
     border-radius: 12px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 1100px;
+    margin: 60px auto;
+    text-align: center;
   }
   .testimonials h3 {
     color: #00ff99;
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 2em;
+    margin-bottom: 40px;
   }
   .testimonial {
     font-style: italic;
-    margin-bottom: 20px;
-    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+  }
+  .testimonial strong {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    color: #ffae00;
   }
   footer {
     text-align: center;
-    padding: 30px;
+    padding: 40px;
     font-size: 0.9em;
     color: #aaa;
     background: #0a0f2c;
@@ -148,6 +169,10 @@
       <a href="/blog/index.html">Blog</a>
     </nav>
   </header>
+  <section class="highlight-section">
+    <h2>Boost Your Productivity and Sales with AI‑Powered Resources</h2>
+    <p>Our curated toolkits and templates are built to help you create, plan, and execute like never before. Join hundreds of marketers already transforming their workflow with Fallat Digital.</p>
+  </section>
   <section class="products">
     <div class="product">
       <img src="https://images.unsplash.com/photo-1607083203103-3d63b4f9a3df?auto=format&fit=crop&w=800&q=80" alt="AI Prompts">
@@ -181,9 +206,9 @@
   </section>
   <section class="testimonials">
     <h3>What Our Customers Say</h3>
-    <div class="testimonial">“Absolutely loved these AI prompts – saved me hours every week!” – Sarah L.</div>
-    <div class="testimonial">“The content calendar is a game changer for my social media planning.” – James K.</div>
-    <div class="testimonial">“The ad copy toolkit improved my click-through rates instantly!” – Maria R.</div>
+    <div class="testimonial">“Absolutely loved these AI prompts – saved me hours every week!”<strong>– Sarah L.</strong></div>
+    <div class="testimonial">“The content calendar is a game changer for my social media planning.”<strong>– James K.</strong></div>
+    <div class="testimonial">“The ad copy toolkit improved my click-through rates instantly!”<strong>– Maria R.</strong></div>
   </section>
   <footer>
     &copy; 2025 Fallat Digital. All rights reserved. <a href="/blog/index.html">Visit our Blog</a>
