@@ -9,20 +9,21 @@
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0a0f2c 0%, #1b2b4f 100%);
-    color: #fff;
+    background: #f4f6fb; /* lighter background for less black */
+    color: #222;
   }
   header {
     text-align: center;
     padding: 120px 20px 140px;
     background: url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
     position: relative;
+    color: #fff;
   }
   header::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.5);
   }
   header h1 {
     position: relative;
@@ -75,11 +76,12 @@
   .highlight-section {
     text-align: center;
     padding: 60px 20px;
-    background: #222f5a;
+    background: #ffffff; /* lighter section */
+    color: #222;
   }
   .highlight-section h2 {
     font-size: 2em;
-    color: #00ff99;
+    color: #00b894;
   }
   .highlight-section p {
     font-size: 1.1em;
@@ -94,18 +96,19 @@
     padding: 60px 40px;
     max-width: 1200px;
     margin: 0 auto;
+    background: #f9f9f9; /* softer background */
   }
   .product {
-    background: #11183d;
+    background: #fff;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
   }
   .product:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 30px rgba(0,255,153,0.6);
+    box-shadow: 0 20px 30px rgba(0,255,153,0.4);
   }
   .product img {
     max-width: 100%;
@@ -115,6 +118,9 @@
   .trust-badges {
     text-align: center;
     margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
   }
   .trust-badges img {
     height: 50px;
@@ -122,15 +128,16 @@
     vertical-align: middle;
   }
   .testimonials {
-    background: #1b2b4f;
+    background: #eef2fa; /* light blue-gray section */
     padding: 60px 20px;
     border-radius: 12px;
     max-width: 1100px;
     margin: 60px auto;
     text-align: center;
+    color: #222;
   }
   .testimonials h3 {
-    color: #00ff99;
+    color: #00b894;
     font-size: 2em;
     margin-bottom: 40px;
   }
@@ -143,17 +150,17 @@
     display: block;
     margin-top: 10px;
     font-style: normal;
-    color: #ffae00;
+    color: #ff6a00;
   }
   footer {
     text-align: center;
     padding: 40px;
     font-size: 0.9em;
-    color: #aaa;
-    background: #0a0f2c;
+    color: #555;
+    background: #eaeaea;
   }
   footer a {
-    color: #00ff99;
+    color: #00b894;
   }
 </style>
 </head>
