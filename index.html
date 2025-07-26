@@ -3,48 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fallat Digital | Smart Tools for Smart Marketers</title>
+<title>Fallat Digital | AI‑Powered Tools for Modern Marketers</title>
+<meta name="description" content="Boost your marketing with AI-powered digital products: prompts, templates, and toolkits designed to skyrocket engagement and sales.">
+<meta property="og:title" content="Fallat Digital | AI‑Powered Tools for Modern Marketers">
+<meta property="og:description" content="Boost your marketing with AI-powered digital products: prompts, templates, and toolkits designed to skyrocket engagement and sales.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-  body{font-family:'Inter','Helvetica Neue',Arial,sans-serif;margin:0;padding:0;color:#222;background:linear-gradient(180deg,#f8f9fa 0%,#ffffff 100%);}html{scroll-behavior:smooth;}img{max-width:100%;display:block;}
-  nav.sticky{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.98);display:flex;justify-content:center;align-items:center;padding:15px 30px;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-weight:600;animation:slideDown 1s ease-out;}
-  @keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
-  nav.sticky a{margin:0 20px;color:#0077b6;text-decoration:none;font-size:1rem;transition:color 0.3s;}nav.sticky a:hover{color:#023e8a;}
-  nav.sticky button{margin-left:20px;background:linear-gradient(90deg,#ff6a00,#ffae00);color:#fff;border:none;padding:12px 24px;border-radius:30px;cursor:pointer;font-size:.95em;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:transform 0.3s;animation:pulse 2s infinite;}
-  nav.sticky button:hover{transform:translateY(-2px);}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,110,0,0.7);}70%{box-shadow:0 0 0 15px rgba(255,110,0,0);}100%{box-shadow:0 0 0 0 rgba(255,110,0,0);}}
-  header{position:relative;text-align:center;padding:160px 20px 140px;background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;color:#fff;}
-  header h1{font-size:3em;font-weight:800;margin-bottom:10px;color:#ffcf33;text-shadow:0 2px 6px rgba(0,0,0,0.5);}
-  header h2{font-weight:400;font-size:1.4em;max-width:600px;margin:0 auto;}
-  .cta-banner{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:15px;}
-  .cta-banner button{background:linear-gradient(90deg,#06d6a0,#118ab2);color:#fff;border:none;padding:18px 40px;border-radius:50px;font-weight:bold;font-size:1.2em;cursor:pointer;transition:transform 0.3s,background 0.3s;box-shadow:0 6px 20px rgba(0,0,0,0.4);}
-  .cta-banner button:hover{background:linear-gradient(90deg,#118ab2,#06d6a0);transform:scale(1.05);}
-  .highlight-section{text-align:center;padding:80px 20px;background:#ffffff;}
-  .highlight-section h2{font-size:2.4em;color:#023e8a;font-weight:700;}
-  .highlight-section p{font-size:1.1em;max-width:800px;margin:20px auto;line-height:1.7;}
-  .features{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:60px 20px;background:#f0f9ff;}
-  .feature-box{background:#fff;border-radius:12px;padding:30px;box-shadow:0 6px 16px rgba(0,0,0,0.08);flex:1 1 280px;text-align:center;transition:transform 0.3s,box-shadow 0.3s;}
-  .feature-box:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15);}
-  .feature-box h3{color:#00b894;margin-bottom:10px;font-size:1.4em;}
-  .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;padding:80px 20px;max-width:1300px;margin:0 auto;background:#ffffff;}
-  .product{background:#fff;border-radius:16px;padding:25px;box-shadow:0 8px 20px rgba(0,0,0,0.08);transition:transform 0.3s,box-shadow 0.3s;text-align:center;}
-  .product:hover{transform:scale(1.03);box-shadow:0 12px 24px rgba(0,0,0,0.12);}
-  .product img{max-width:100%;border-radius:12px;margin-bottom:15px;}
-  .product button{background:linear-gradient(90deg,#00ff99,#00ccff);color:#0a0f2c;border:none;padding:12px 20px;border-radius:50px;font-weight:bold;font-size:1em;cursor:pointer;transition:background 0.3s;}
-  .product button:hover{background:linear-gradient(90deg,#00ccff,#00ff99);}
-  .trust-badges{text-align:center;margin:60px auto;background:#f8f9fa;padding:20px;border-radius:12px;}
-  .trust-badges img{height:50px;margin:0 15px;}
-  .logos{background:#ffffff;padding:40px 20px;text-align:center;}
-  .logos img{height:40px;margin:10px 20px;filter:grayscale(100%);opacity:0.8;}
-  .testimonials{background:#f0f9ff;padding:80px 20px;border-radius:12px;max-width:1100px;margin:60px auto;text-align:center;color:#222;}
-  .testimonials h3{color:#023e8a;font-size:2em;margin-bottom:40px;}
-  .testimonial{font-style:italic;margin-bottom:30px;font-size:1.1em;}
-  .testimonial strong{display:block;margin-top:10px;font-style:normal;color:#ff6a00;}
-  .newsletter{text-align:center;padding:60px 20px;background:#ffffff;}
-  .newsletter input[type=email]{padding:12px;font-size:1em;width:250px;border-radius:30px;border:1px solid #ccc;margin-right:10px;}
-  .newsletter button{padding:12px 24px;background:#0077b6;color:#fff;border:none;border-radius:30px;font-weight:bold;cursor:pointer;transition:background 0.3s;}
-  .newsletter button:hover{background:#023e8a;}
-  .success-message{display:none;color:green;margin-top:15px;font-weight:bold;}
-  footer{text-align:center;padding:50px 20px;font-size:0.9em;color:#555;background:#f1f1f1;}
+body{margin:0;padding:0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#222;background:linear-gradient(180deg,#f8f9fa 0%,#ffffff 100%);scroll-behavior:smooth;}
+img{max-width:100%;display:block;border:0}
+nav.sticky{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.98);display:flex;justify-content:center;align-items:center;padding:15px 30px;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-weight:600;animation:slideDown 1s ease-out}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+nav.sticky a{margin:0 20px;color:#0077b6;text-decoration:none;font-size:1rem;transition:color .3s}
+nav.sticky a:hover{color:#023e8a}
+nav.sticky button{margin-left:20px;background:linear-gradient(90deg,#ff6a00,#ffae00);color:#fff;border:none;padding:12px 24px;border-radius:30px;cursor:pointer;font-size:.95em;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:transform .3s;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,110,0,0.7);}70%{box-shadow:0 0 0 15px rgba(255,110,0,0);}100%{box-shadow:0 0 0 0 rgba(255,110,0,0);}}
+header{position:relative;text-align:center;padding:180px 20px 160px;background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;color:#fff;}
+header h1{font-size:3.2em;font-weight:800;margin-bottom:15px;color:#ffcf33;text-shadow:0 2px 6px rgba(0,0,0,0.6);}
+header h2{font-weight:400;font-size:1.4em;max-width:640px;margin:0 auto;}
+.cta-banner{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.cta-banner button{background:linear-gradient(90deg,#06d6a0,#118ab2);color:#fff;border:none;padding:18px 40px;border-radius:50px;font-weight:bold;font-size:1.2em;cursor:pointer;transition:transform .3s,background .3s;box-shadow:0 6px 20px rgba(0,0,0,0.4);}
+.cta-banner button:hover{background:linear-gradient(90deg,#118ab2,#06d6a0);transform:scale(1.05);}
+.countdown{margin-top:30px;font-size:1.4em;color:#ff6a00;font-weight:bold;text-shadow:0 1px 2px rgba(0,0,0,0.4);}
+.highlight-section{text-align:center;padding:80px 20px;background:#ffffff;}
+.highlight-section h2{font-size:2.4em;color:#023e8a;font-weight:700;}
+.highlight-section p{font-size:1.1em;max-width:800px;margin:20px auto;line-height:1.7;}
+.features{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:60px 20px;background:#f0f9ff;}
+.feature-box{background:#fff;border-radius:12px;padding:30px;box-shadow:0 6px 16px rgba(0,0,0,0.08);flex:1 1 280px;text-align:center;transition:transform .3s,box-shadow .3s;}
+.feature-box:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+.feature-box h3{color:#00b894;margin-bottom:10px;font-size:1.4em;}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;padding:80px 20px;max-width:1300px;margin:0 auto;background:#ffffff;}
+.product{background:#fff;border-radius:16px;padding:25px;box-shadow:0 8px 20px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;text-align:center;}
+.product:hover{transform:scale(1.03);box-shadow:0 12px 24px rgba(0,0,0,0.12);}
+.product button{background:linear-gradient(90deg,#00ff99,#00ccff);color:#0a0f2c;border:none;padding:12px 20px;border-radius:50px;font-weight:bold;font-size:1em;cursor:pointer;transition:background .3s;}
+.product button:hover{background:linear-gradient(90deg,#00ccff,#00ff99);}
+.trust-badges{text-align:center;margin:60px auto;background:#f8f9fa;padding:20px;border-radius:12px;}
+.trust-badges img{height:50px;margin:0 15px;}
+.logos{background:#ffffff;padding:40px 20px;text-align:center;}
+.logos img{height:40px;margin:10px 20px;filter:grayscale(100%);opacity:0.8;}
+.testimonials{background:#f0f9ff;padding:80px 20px;border-radius:12px;max-width:1100px;margin:60px auto;text-align:center;color:#222;}
+.testimonials h3{color:#023e8a;font-size:2em;margin-bottom:40px;}
+.testimonial-carousel .testimonial{display:none;font-style:italic;margin-bottom:30px;font-size:1.1em;}
+.testimonial-carousel .testimonial strong{display:block;margin-top:10px;font-style:normal;color:#ff6a00;}
+.testimonial-carousel .testimonial.active{display:block;}
+.newsletter{text-align:center;padding:60px 20px;background:#ffffff;}
+.newsletter input[type=email]{padding:12px;font-size:1em;width:250px;border-radius:30px;border:1px solid #ccc;margin-right:10px;}
+.newsletter button{padding:12px 24px;background:#0077b6;color:#fff;border:none;border-radius:30px;font-weight:bold;cursor:pointer;transition:background .3s;}
+.newsletter button:hover{background:#023e8a;}
+.success-message{display:none;color:green;margin-top:15px;font-weight:bold;}
+.exit-popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:2000;}
+.exit-popup-content{background:#fff;padding:40px;border-radius:16px;text-align:center;max-width:400px;animation:fadeIn .4s ease;}
+.exit-popup-content h3{margin-bottom:10px;color:#023e8a;}
+.exit-popup-content p{margin-bottom:20px;}
+.exit-popup-content button{padding:12px 24px;background:#0077b6;color:#fff;border:none;border-radius:30px;font-weight:bold;cursor:pointer;}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+footer{text-align:center;padding:50px 20px;font-size:0.9em;color:#555;background:#f1f1f1;}
 </style>
 </head>
 <body>
@@ -54,65 +68,78 @@
     <a href="/blog/index.html">Blog</a>
     <button onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">Join Now</button>
   </nav>
+
   <header>
     <h1>Fallat Digital</h1>
-    <h2>Smart Tools for Smart Marketers</h2>
+    <h2>AI‑Powered Tools to Supercharge Your Marketing</h2>
     <div class="cta-banner">
       <button onclick="document.querySelector('.products').scrollIntoView({behavior:'smooth'})">🔥 Get Started Now</button>
       <button onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})" style="background:#ff6a00;">📧 Join Newsletter</button>
     </div>
+    <div class="countdown" id="countdown">
+      🚀 Special Offer Ends In: <span id="timeLeft">00:00:00</span>
+    </div>
   </header>
+
   <section class="highlight-section" id="features">
     <h2>Boost Your Productivity and Sales</h2>
-    <p>Fallat Digital delivers tools and templates designed for modern marketers who demand efficiency, style, and proven ROI. Join a growing community of marketers achieving more in less time.</p>
+    <p>Fallat Digital delivers AI‑powered resources built for marketers who demand efficiency, style, and proven ROI. Join a growing community achieving more in less time.</p>
   </section>
+
   <section class="features">
-    <div class="feature-box"><h3>⚡ Fast Results</h3><p>Instant access to resources that save you time and energy.</p></div>
-    <div class="feature-box"><h3>🎨 Beautiful Designs</h3><p>Modern, responsive templates to elevate your brand.</p></div>
-    <div class="feature-box"><h3>📈 Proven ROI</h3><p>Strategies and prompts crafted to increase engagement.</p></div>
+    <div class="feature-box"><h3>⚡ Fast Results</h3><p>Instant AI‑enhanced resources that save you time and energy.</p></div>
+    <div class="feature-box"><h3>🎨 Stunning Designs</h3><p>Modern, responsive templates to elevate your brand presence.</p></div>
+    <div class="feature-box"><h3>📈 Proven ROI</h3><p>Prompts and strategies crafted to increase engagement and sales.</p></div>
   </section>
+
   <section class="products" id="products">
     <div class="product">
       <img loading="lazy" src="https://source.unsplash.com/800x600/?technology,ai" alt="AI Prompts Resource">
       <h3>200 AI Prompts for Social Media Managers</h3>
-      <p>A curated PDF with ready-to-use prompts to speed up your content creation.</p>
+      <p>A curated PDF with ready‑to‑use prompts to speed up your content creation.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_6fYfZBcqYb4jg88fYZ'">Buy Now $19</button>
     </div>
     <div class="product">
       <img loading="lazy" src="https://source.unsplash.com/800x600/?calendar,planning" alt="Content Calendar Template">
-      <h3>30-Day Content Calendar Template</h3>
+      <h3>30‑Day Content Calendar Template</h3>
       <p>Plan your month with AI prompts integrated into Notion & Google Sheets.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_9AQcO3bRTdN1eQY8ww'">Buy Now $29</button>
     </div>
     <div class="product">
       <img loading="lazy" src="https://source.unsplash.com/800x600/?advertising,marketing" alt="Ad Copy Toolkit">
-      <h3>High-Engagement Ad Copy Toolkit</h3>
+      <h3>High‑Engagement Ad Copy Toolkit</h3>
       <p>Craft better ads faster with proven AI prompts for copywriting.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_cN2bJ71Zlf3KcMUfYZ'">Buy Now $15</button>
     </div>
     <div class="product">
       <img loading="lazy" src="https://source.unsplash.com/800x600/?business,bundle" alt="All-in-One Bundle">
-      <h3>All-in-One Bundle</h3>
+      <h3>All‑in‑One Bundle</h3>
       <p>Get everything and save! Instant download of all products.</p>
       <button onclick="window.location.href='https://buy.stripe.com/live_fZe8wt9Rj6Ff38I5kH'">Buy Now $49</button>
     </div>
   </section>
+
   <section class="trust-badges">
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/SSL-certificates.svg" alt="SSL Secured">
     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968523.png" alt="Stripe Payment">
     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Verified Seller">
   </section>
+
   <section class="logos">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon logo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple logo">
   </section>
+
   <section class="testimonials">
     <h3>What Our Customers Say</h3>
-    <div class="testimonial">“Absolutely loved these AI prompts – saved me hours every week!”<strong>– Sarah L.</strong></div>
-    <div class="testimonial">“The content calendar is a game changer for my social media planning.”<strong>– James K.</strong></div>
-    <div class="testimonial">“The ad copy toolkit improved my click-through rates instantly!”<strong>– Maria R.</strong></div>
+    <div class="testimonial-carousel">
+      <div class="testimonial active">“Absolutely loved these AI prompts – saved me hours every week!”<strong>– Sarah L.</strong></div>
+      <div class="testimonial">“The content calendar is a game changer for my social media planning.”<strong>– James K.</strong></div>
+      <div class="testimonial">“The ad copy toolkit improved my click-through rates instantly!”<strong>– Maria R.</strong></div>
+    </div>
   </section>
+
   <section class="newsletter">
     <h3>Join Our Community</h3>
     <p>Sign up for exclusive updates, offers, and insider tips.</p>
@@ -120,9 +147,19 @@
     <button onclick="subscribe()">Subscribe</button>
     <div class="success-message" id="successMsg">✅ Thank you for subscribing!</div>
   </section>
+
+  <div class="exit-popup" id="exitPopup">
+    <div class="exit-popup-content">
+      <h3>Wait! Before you go...</h3>
+      <p>Join our AI marketers community and get 10% off your first purchase!</p>
+      <button onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'});document.getElementById('exitPopup').style.display='none';">Claim Offer</button>
+    </div>
+  </div>
+
   <footer>
     &copy; 2025 Fallat Digital. All rights reserved. <a href="/blog/index.html">Visit our Blog</a>
   </footer>
+
   <script>
     function subscribe(){
       const email=document.getElementById('email').value.trim();
@@ -130,13 +167,34 @@
         alert('Please enter a valid email');
         return;
       }
-      // TODO: integrate with your backend API or mailing list provider here.
       document.getElementById('successMsg').style.display='block';
       document.getElementById('email').value='';
     }
+    const endTime = Date.now() + 24*60*60*1000;
+    setInterval(()=>{
+      const diff=endTime-Date.now();
+      if(diff<=0){document.getElementById('timeLeft').textContent='EXPIRED';return;}
+      const h=Math.floor(diff/1000/60/60);
+      const m=Math.floor((diff/1000/60)%60);
+      const s=Math.floor((diff/1000)%60);
+      document.getElementById('timeLeft').textContent=`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    },1000);
+    const testimonials=document.querySelectorAll('.testimonial-carousel .testimonial');
+    let currentTestimonial=0;
+    setInterval(()=>{
+      testimonials[currentTestimonial].classList.remove('active');
+      currentTestimonial=(currentTestimonial+1)%testimonials.length;
+      testimonials[currentTestimonial].classList.add('active');
+    },4000);
+    let exitPopupShown=false;
+    document.addEventListener('mouseleave',(e)=>{
+      if(e.clientY<0 && !exitPopupShown){
+        document.getElementById('exitPopup').style.display='flex';
+        exitPopupShown=true;
+      }
+    });
   </script>
 </body>
 </html>
-
 
 
