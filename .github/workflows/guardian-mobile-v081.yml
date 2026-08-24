@@ -1,0 +1,130 @@
+name: Guardian Mobile v0.8.1 APK
+
+on:
+  push:
+    branches:
+      - guardian-mobile-v081-build
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout harness
+        uses: actions/checkout@v4
+
+      - name: Reconstruct verified source
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          EXPECTED_SHA256: 5ed534318e4fae2f16571cf1d37932343d90c975c1f86a4f7f9a080b6b6ab83d
+        run: |
+          set -euo pipefail
+          : > /tmp/guardian-source.b64
+          for issue in 1 2 3 4 5; do
+            curl -fsSL \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${REPOSITORY}/issues/${issue}" \
+            | python3 -c 'import json,sys; sys.stdout.write(json.load(sys.stdin)["body"])' \
+            >> /tmp/guardian-source.b64
+          done
+          base64 --decode /tmp/guardian-source.b64 > /tmp/guardian-source.tar.xz
+          echo "${EXPECTED_SHA256}  /tmp/guardian-source.tar.xz" | sha256sum -c -
+          mkdir -p /tmp/guardian-project
+          tar -xJf /tmp/guardian-source.tar.xz -C /tmp/guardian-project
+          test -f /tmp/guardian-project/settings.gradle.kts
+          test -f /tmp/guardian-project/app/build.gradle.kts
+          test -f /tmp/guardian-project/app/src/main/AndroidManifest.xml
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android API 37
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-37" "build-tools;36.0.0" "platform-tools"
+
+      - name: Set up Gradle 9.5
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+
+      - name: Compile Guardian APK
+        id: compile
+        continue-on-error: true
+        working-directory: /tmp/guardian-project
+        run: |
+          set -o pipefail
+          gradle --no-daemon --stacktrace :app:assembleDebug 2>&1 | tee /tmp/guardian-build.log
+
+      - name: Verify APK
+        id: verify
+        if: steps.compile.outcome == 'success'
+        run: |
+          APK=/tmp/guardian-project/app/build/outputs/apk/debug/app-debug.apk
+          test -s "$APK"
+          sha256sum "$APK" | tee /tmp/guardian-apk-sha.txt
+          ls -lh "$APK"
+
+      - name: Upload APK artifact
+        if: steps.compile.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Guardian-Mobile-v0.8.1-debug
+          path: /tmp/guardian-project/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Report compiler result
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+          SOURCE_OUTCOME: ${{ steps.source.outcome }}
+          COMPILE_OUTCOME: ${{ steps.compile.outcome }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+        run: |
+          python3 - <<'PY' > /tmp/report.json
+          import json, os, pathlib
+          log = pathlib.Path('/tmp/guardian-build.log')
+          tail = log.read_text(errors='replace')[-20000:] if log.exists() else '(compiler did not start; see source/setup status)'
+          sha = pathlib.Path('/tmp/guardian-apk-sha.txt')
+          apk_sha = sha.read_text(errors='replace').strip() if sha.exists() else '(no APK)'
+          outcome = os.environ.get('COMPILE_OUTCOME') or 'not-run'
+          title = f"guardian-v081-ci-{os.environ['RUN_ID']}-{outcome}"
+          body = (
+            f"Run ID: {os.environ['RUN_ID']}\n"
+            f"Commit: {os.environ['COMMIT_SHA']}\n"
+            f"Source: {os.environ.get('SOURCE_OUTCOME')}\n"
+            f"Compile: {outcome}\n"
+            f"Verify: {os.environ.get('VERIFY_OUTCOME')}\n"
+            f"APK SHA: {apk_sha}\n\n"
+            f"Compiler tail:\n```text\n{tail}\n```"
+          )
+          print(json.dumps({'title': title, 'body': body}))
+          PY
+          curl -fsSL -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${REPOSITORY}/issues" \
+            --data-binary @/tmp/report.json >/dev/null
+
+      - name: Fail if compile failed
+        if: steps.compile.outcome != 'success'
+        run: exit 1
