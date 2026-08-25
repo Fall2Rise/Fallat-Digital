@@ -1,0 +1,140 @@
+name: Guardian V5.2 isolated Android build
+
+on:
+  push:
+    branches:
+      - guardian-v52-builder
+    paths:
+      - ".github/workflows/guardian-v52-secure.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guardian-v52-isolated-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out isolated build branch
+        uses: actions/checkout@v4
+        with:
+          ref: guardian-v52-builder
+
+      - name: Create one-time source-encryption key
+        run: |
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out /tmp/guardian-private.pem
+          openssl pkey -in /tmp/guardian-private.pem -pubout -out /tmp/guardian-public.pem
+
+      - name: Publish one-time public key
+        uses: actions/upload-artifact@v4
+        with:
+          name: guardian-v52-ephemeral-key
+          path: /tmp/guardian-public.pem
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Receive and decrypt sealed Guardian source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          fetch_repo_file() {
+            local repo_path="$1"
+            local output="$2"
+            curl -fsSL \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/$repo_path?ref=guardian-v52-builder" \
+              | python3 -c 'import base64,json,sys; value=json.load(sys.stdin); sys.stdout.buffer.write(base64.b64decode(value["content"]))' \
+              > "$output"
+          }
+
+          ready=false
+          for attempt in $(seq 1 180); do
+            if fetch_repo_file "build-input-v52/guardian-source.enc" /tmp/guardian-source.enc && \
+               fetch_repo_file "build-input-v52/guardian-key.enc" /tmp/guardian-key.enc && \
+               fetch_repo_file "build-input-v52/guardian-source.sha256" /tmp/guardian-source.sha256; then
+              ready=true
+              break
+            fi
+            sleep 5
+          done
+          test "$ready" = true
+          grep -Eq '^[0-9a-f]{64}$' /tmp/guardian-source.sha256
+          openssl pkeyutl -decrypt \
+            -inkey /tmp/guardian-private.pem \
+            -in /tmp/guardian-key.enc \
+            -out /tmp/guardian-passphrase \
+            -pkeyopt rsa_padding_mode:oaep \
+            -pkeyopt rsa_oaep_md:sha256
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 300000 -md sha256 \
+            -in /tmp/guardian-source.enc \
+            -out /tmp/guardian-source.zip \
+            -pass file:/tmp/guardian-passphrase
+          echo "$(cat /tmp/guardian-source.sha256)  /tmp/guardian-source.zip" | sha256sum --check
+          mkdir -p build
+          unzip -q /tmp/guardian-source.zip -d build
+          test -f build/GUARDIAN_MOBILE_V5/settings.gradle.kts
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+          cache-dependency-path: |
+            build/GUARDIAN_MOBILE_V5/**/*.gradle*
+            build/GUARDIAN_MOBILE_V5/gradle/wrapper/gradle-wrapper.properties
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install pinned Android platform
+        run: sdkmanager "platforms;android-37" "build-tools;37.0.0"
+
+      - name: Verify source contract
+        working-directory: build/GUARDIAN_MOBILE_V5
+        run: python3 scripts/verify_release.py
+
+      - name: Compile tests and release APK
+        working-directory: build/GUARDIAN_MOBILE_V5
+        env:
+          GRADLE_OPTS: -Dorg.gradle.daemon=false
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest assembleRelease --stacktrace --no-daemon
+
+      - name: Align and inspect unsigned release
+        run: |
+          BUILD_TOOLS="$ANDROID_SDK_ROOT/build-tools/37.0.0"
+          "$BUILD_TOOLS/zipalign" -f -p 4 \
+            build/GUARDIAN_MOBILE_V5/app/build/outputs/apk/release/app-release-unsigned.apk \
+            Guardian-V5.2.0-aligned-unsigned.apk
+          "$BUILD_TOOLS/zipalign" -c -p 4 Guardian-V5.2.0-aligned-unsigned.apk
+          "$BUILD_TOOLS/aapt2" dump badging Guardian-V5.2.0-aligned-unsigned.apk > release-metadata.txt
+          sha256sum Guardian-V5.2.0-aligned-unsigned.apk >> release-metadata.txt
+          cp "$BUILD_TOOLS/lib/apksigner.jar" apksigner.jar
+
+      - name: Upload verified unsigned release
+        uses: actions/upload-artifact@v4
+        with:
+          name: guardian-v52-unsigned
+          path: |
+            Guardian-V5.2.0-aligned-unsigned.apk
+            apksigner.jar
+            release-metadata.txt
+            build/GUARDIAN_MOBILE_V5/app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Remove transient private material
+        if: always()
+        run: |
+          shred -u /tmp/guardian-private.pem /tmp/guardian-passphrase 2>/dev/null || true
+          rm -f /tmp/guardian-public.pem /tmp/guardian-source.enc /tmp/guardian-key.enc
+          rm -f /tmp/guardian-source.sha256 /tmp/guardian-source.zip
